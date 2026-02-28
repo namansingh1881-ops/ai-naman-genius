@@ -1,28 +1,65 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>AI Naman Genius</title>
 
 <style>
+
+/* GLOBAL */
 body{
   margin:0;
   font-family:'Segoe UI',sans-serif;
-  color:white;
   background:black;
+  color:white;
   overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* CYBER BACKGROUND */
 .bg{
   position:fixed;
   width:100%;
   height:100%;
-  background: radial-gradient(circle at 30% 30%,#00f5ff22,transparent),
-              radial-gradient(circle at 70% 70%,#ff00ff22,transparent),
-              linear-gradient(#050510,#000);
+  background:
+  radial-gradient(circle at 20% 30%,#00f5ff22,transparent),
+  radial-gradient(circle at 80% 70%,#ff00ff22,transparent),
+  linear-gradient(#050510,#000);
   z-index:-1;
+}
+
+/* MENU BUTTON */
+.menuBtn{
+  position:fixed;
+  top:20px;
+  left:20px;
+  font-size:30px;
+  background:none;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+/* MENU BOX */
+.menuBox{
+  display:none;
+  position:fixed;
+  top:70px;
+  left:20px;
+  background:rgba(0,0,0,0.9);
+  padding:20px;
+  border-radius:14px;
+  width:260px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 20px #000;
+}
+
+.menuBox a{
+  display:block;
+  padding:10px;
+  color:white;
+  text-decoration:none;
 }
 
 /* HERO */
@@ -36,70 +73,53 @@ body{
 }
 
 .hero h1{
-  font-size:60px;
+  font-size:70px;
   background:linear-gradient(90deg,#00f5ff,#ff00ff);
   -webkit-background-clip:text;
   color:transparent;
 }
 
+/* BUTTON */
 .btn{
   margin:12px;
-  padding:16px 34px;
+  padding:16px 36px;
   border:none;
-  border-radius:40px;
+  border-radius:30px;
   background:linear-gradient(90deg,#00f5ff,#ff00ff);
   color:black;
   font-weight:bold;
-  font-size:18px;
   cursor:pointer;
   text-decoration:none;
 }
 
-/* 3 DOT BUTTON LEFT */
-.menuBtn{
-  position:fixed;
-  top:20px;
-  left:20px;
-  font-size:30px;
-  background:none;
-  border:none;
-  color:white;
-  cursor:pointer;
+/* SECTION */
+.section{
+  padding:80px 20px;
+  text-align:center;
 }
 
-/* SIDE MENU LEFT FULL */
-.menuBox{
-  position:fixed;
-  top:0;
-  left:-260px;
-  width:260px;
-  height:100%;
-  background:rgba(0,0,0,0.95);
-  backdrop-filter:blur(10px);
-  padding:20px;
-  transition:0.4s;
-  box-shadow:0 0 25px #000;
+/* SERVICES GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  margin-top:40px;
 }
 
-.menuBox a{
-  color:white;
-  text-decoration:none;
-  display:block;
-  padding:12px;
-  font-size:18px;
+.card{
+  background:#111;
+  padding:25px;
+  border-radius:12px;
+  box-shadow:0 0 20px #000;
 }
 
-.menuBox hr{
-  margin:15px 0;
-  border:0.5px solid #444;
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:30px;
+  background:#050510;
 }
 
-/* CONTACT INFO */
-.contactInfo{
-  font-size:14px;
-  line-height:1.6;
-  opacity:0.8;
-}
 </style>
 </head>
 
@@ -107,42 +127,119 @@ body{
 
 <div class="bg"></div>
 
-<!-- 3 DOT BUTTON -->
-<button class="menuBtn" onclick="toggleMenu()">⋮</button>
+<!-- MENU -->
+<button class="menuBtn" onclick="toggleMenu()">☰</button>
 
-<!-- SIDE MENU -->
 <div id="menuBox" class="menuBox">
-  <a href="index.html">🏠 Home</a>
-  <a href="services.html">🛠 Services</a>
-  <a href="contact.html">📩 Contact</a>
-
+  <a href="#">Home</a>
+  <a href="#services">Services</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#contact">Contact</a>
   <hr>
-
-  <div class="contactInfo">
-    📧 Namosyx@gmail.com<br>
-    📍 New Delhi<br>
-    📸 @naman_singh6556
-  </div>
+  📧 Namosyx@gmail.com<br>
+  📍 New Delhi<br>
+  📷 @naman_singh6556
 </div>
 
 <!-- HERO -->
 <div class="hero">
   <h1>AI Naman Genius</h1>
-  <p>Your Digital Growth Partner</p>
+  <p>Your Cyber AI Digital Partner</p>
 
-  <!-- WORKING BUTTONS -->
-  <a href="/ai-naman-genius/contact.html" class="btn">Hire Me</a>
-<a href="/ai-naman-genius/ai.html" class="btn">Talk to AI</a>
+  <a href="#contact" class="btn">Hire Me</a>
+  <a href="ai.html" class="btn">Talk to AI</a>
 </div>
 
-<script>and 
+<!-- ABOUT -->
+<div class="section">
+  <h2>About Me</h2>
+  <p>
+  I create futuristic websites, AI chatbots, branding and business ideas.
+  Helping influencers, startups and businesses grow online.
+  </p>
+</div>
+
+<!-- SERVICES -->
+<div id="services" class="section">
+  <h2>My Services</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Website Development</h3>
+      <p>Cyber futuristic websites for influencers & businesses</p>
+    </div>
+
+    <div class="card">
+      <h3>AI Chatbot</h3>
+      <p>Custom AI chatbot for your business</p>
+    </div>
+
+    <div class="card">
+      <h3>Logo Design</h3>
+      <p>Modern logo & branding</p>
+    </div>
+
+    <div class="card">
+      <h3>Business Ideas</h3>
+      <p>AI powered business strategy</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- PRICING -->
+<div id="pricing" class="section">
+  <h2>Pricing</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <h3>Demo Website</h3>
+      <p>₹99</p>
+    </div>
+
+    <div class="card">
+      <h3>Influencer Website</h3>
+      <p>₹199</p>
+    </div>
+
+    <div class="card">
+      <h3>Professional Website</h3>
+      <p>₹349</p>
+    </div>
+
+    <div class="card">
+      <h3>Business Website</h3>
+      <p>₹699</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="section">
+  <h2>Client Reviews</h2>
+  <p>"Amazing futuristic website" — Rahul</p>
+  <p>"Best AI chatbot service" — Aman</p>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section">
+  <h2>Contact</h2>
+  <p>Email: Namosyx@gmail.com</p>
+  <p>Location: New Delhi</p>
+  <p>Instagram: @naman_singh6556</p>
+</div>
+
+<footer>
+  © 2026 AI Naman Genius
+</footer>
+
+<script>
 function toggleMenu(){
   var menu = document.getElementById("menuBox");
-  if(menu.style.left === "0px"){
-    menu.style.left = "-260px";
-  } else {
-    menu.style.left = "0px";
-  }
+  menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
 </script>
 
