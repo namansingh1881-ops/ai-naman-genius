@@ -9,8 +9,26 @@
 
 <p>Hello 👋 How can I help you?</p>
 
-<input type="text" placeholder="Type message...">
-<button>Send</button>
+<input id="msg" type="text" placeholder="Type message...">
+<button onclick="sendMsg()">Send</button>
+
+<p id="reply"></p>
+  <a href="index.html">← Back to Home</a>
+  <script>
+function sendMsg() {
+  var userMsg = document.getElementById("msg").value;
+  
+  if(userMsg.toLowerCase() == "hello") {
+    document.getElementById("reply").innerHTML = "Hello 👋 Welcome to AI Naman Genius";
+  }
+  else if(userMsg.toLowerCase() == "services") {
+    document.getElementById("reply").innerHTML = "We provide Website Development, AI Chatbot, Digital Marketing, UI/UX Design";
+  }
+  else {
+    document.getElementById("reply").innerHTML = "Sorry 😅 I am learning...";
+  }
+}
+  </script>
 
 <br><br>
 <a href="index.html">⬅ Back to Home</a>
