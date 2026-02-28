@@ -9,7 +9,6 @@
 
 <h2 style="text-align:center">AI Naman Support 🤖</h2>
 
-<!-- CHAT AREA -->
 <div id="chatArea" style="
 height:55vh;
 overflow-y:auto;
@@ -17,7 +16,6 @@ padding:10px;
 margin-bottom:80px;
 "></div>
 
-<!-- INPUT AREA -->
 <div style="
 position:fixed;
 bottom:0;
@@ -46,14 +44,13 @@ font-weight:bold;
 
 <script>
 
-async function sendMsg(){
+function sendMsg(){
 
 let input = document.getElementById("msg");
-let text = input.value;
+let text = input.value.toLowerCase();
 if(text=="") return;
 
 let area = document.getElementById("chatArea");
-
 
 // USER MESSAGE
 area.innerHTML += `
@@ -70,23 +67,27 @@ display:inline-block;
 input.value="";
 
 
-// 🤖 GEMINI API CALL
-let response = await fetch(
-"https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=AIzaSyAfAkhowyBI2e9-ijErdoTjziHJDTLXdv8",
-{
-method:"POST",
-headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-contents:[{parts:[{text:text}]}]
-})
-}
-);
+// 🤖 SMART AI REPLY
+let reply="";
 
-let data = await response.json();
-let aiReply = data.candidates[0].content.parts[0].text;
+if(text.includes("hello") || text.includes("hi"))
+reply="Hello 👋 I am AI Naman Support. How can I help you?";
+
+else if(text.includes("contact"))
+reply="📞 Contact: +91 XXXXXXXX";
+
+else if(text.includes("service"))
+reply="We provide Website Development, AI Chatbot, Digital Marketing, UI/UX";
+
+else if(text.includes("price"))
+reply="Pricing depends on project. Please contact for details.";
+
+else
+reply="I am learning 🤖 Please ask about services or contact.";
 
 
 // AI MESSAGE
+setTimeout(()=>{
 area.innerHTML += `
 <div style="text-align:left;margin:10px">
 <span style="
@@ -94,10 +95,12 @@ background:#222;
 padding:10px 14px;
 border-radius:15px;
 display:inline-block;
-">${aiReply}</span>
+">${reply}</span>
 </div>`;
 
 area.scrollTop = area.scrollHeight;
+
+},500);
 
 }
 
