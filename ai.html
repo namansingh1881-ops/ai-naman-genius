@@ -7,38 +7,33 @@
 
 <style>
 
-/* GLOBAL */
 body{
   margin:0;
-  font-family:'Segoe UI',sans-serif;
-  background:black;
+  font-family:Arial;
+  background:#000;
   color:white;
 }
 
 /* HEADER */
 .header{
+  background:#050510;
+  padding:15px;
+  font-size:22px;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 20px;
-  background:#050510;
-  box-shadow:0 0 10px #000;
-}
-
-.title{
-  font-size:20px;
 }
 
 .homeBtn{
-  text-decoration:none;
-  color:black;
   background:linear-gradient(90deg,#00f5ff,#ff00ff);
   padding:8px 16px;
-  border-radius:10px;
+  border-radius:12px;
+  text-decoration:none;
+  color:black;
   font-weight:bold;
 }
 
-/* CHAT AREA */
+/* CHAT */
 #chat{
   height:78vh;
   overflow-y:auto;
@@ -47,22 +42,17 @@ body{
 
 /* MESSAGE */
 .msg{
-  margin:10px 0;
-  display:flex;
+  margin:12px 0;
 }
 
-.user{
-  justify-content:flex-end;
-}
-
-.ai{
-  justify-content:flex-start;
-}
+.user{ text-align:right; }
+.ai{ text-align:left; }
 
 .bubble{
-  max-width:75%;
+  display:inline-block;
   padding:12px 16px;
   border-radius:16px;
+  max-width:75%;
 }
 
 .user .bubble{
@@ -72,7 +62,6 @@ body{
 
 .ai .bubble{
   background:#111;
-  border:1px solid #333;
 }
 
 /* INPUT AREA */
@@ -81,29 +70,28 @@ body{
   bottom:0;
   width:100%;
   background:#050510;
-  padding:12px;
+  padding:10px;
   display:flex;
-  gap:10px;
+  gap:8px;
 }
 
-#msg{
+input{
   flex:1;
   padding:12px;
   border-radius:10px;
   border:none;
 }
 
-.sendBtn{
-  padding:12px 20px;
+button{
+  padding:12px 18px;
   border:none;
   border-radius:10px;
   background:linear-gradient(90deg,#00f5ff,#ff00ff);
   font-weight:bold;
-  cursor:pointer;
 }
 
 .clearBtn{
-  background:#222;
+  background:#333;
   color:white;
 }
 
@@ -113,120 +101,131 @@ body{
 <body>
 
 <div class="header">
-  <div class="title">AI Naman Support 🤖</div>
+  AI Naman Support 🤖
   <a href="index.html" class="homeBtn">Home</a>
 </div>
 
 <div id="chat"></div>
 
 <div class="inputArea">
-  <input id="msg" placeholder="Type message...">
-  <button class="sendBtn" onclick="send()">Send</button>
-  <button class="sendBtn clearBtn" onclick="clearChat()">Clear</button>
+  <input id="msg" placeholder="Type message..." onkeypress="if(event.key==='Enter')send()">
+  <button onclick="send()">Send</button>
+  <button class="clearBtn" onclick="clearChat()">Clear</button>
 </div>
 
 <script>
 
-/* SEND MESSAGE */
+// FIRST MESSAGE
+window.onload = ()=>{
+  aiMsg("Hello 👋 I am AI Naman Support.\nAsk about services, pricing, order or contact.");
+};
+
+function userMsg(text){
+  chat.innerHTML += `
+  <div class="msg user">
+    <span class="bubble">${text}</span>
+  </div>`;
+}
+
+function aiMsg(text){
+  chat.innerHTML += `
+  <div class="msg ai">
+    <span class="bubble">${text}</span>
+  </div>`;
+  chat.scrollTop = chat.scrollHeight;
+}
+
 function send(){
 
   let input = document.getElementById("msg");
-  let text = input.value.trim();
-  if(text==="") return;
+  let text = input.value.toLowerCase();
+  if(text=="") return;
 
-  addUser(text);
-  input.value="";
+  userMsg(text);
 
-  setTimeout(()=>reply(text.toLowerCase()),600);
-}
+  let reply = "";
 
-/* ADD USER MESSAGE */
-function addUser(text){
-  let chat = document.getElementById("chat");
-  chat.innerHTML += `
-  <div class="msg user">
-    <div class="bubble">${text}</div>
-  </div>`;
-  scrollDown();
-}
-
-/* ADD AI MESSAGE */
-function addAI(text){
-  let chat = document.getElementById("chat");
-  chat.innerHTML += `
-  <div class="msg ai">
-    <div class="bubble">${text}</div>
-  </div>`;
-  scrollDown();
-}
-
-/* REPLY SYSTEM */
-function reply(text){
-
-  let r="";
-
-  // OWNER CONTACT KEYWORDS
+  // CONTACT OWNER
   if(
     text.includes("help") ||
     text.includes("owner") ||
-    text.includes("admin") ||
     text.includes("contact") ||
-    text.includes("baat") ||
+    text.includes("support") ||
     text.includes("madad") ||
-    text.includes("support")
+    text.includes("baat")
   ){
-    r = `
-    📩 Contact Owner:
+    reply = `
+📩 Contact Owner:
 
-    Email: Namosyx@gmail.com
-    Instagram: @naman_singh6556
-    Location: New Delhi
+Email: Namosyx@gmail.com
+Instagram: @naman_singh6556
+Location: New Delhi
 
-    Owner will reply soon 🚀
-    `;
+Owner will reply soon 🚀
+`;
   }
 
-  // PRICING
-  else if(text.includes("price") || text.includes("cost")){
-    r = `
-    💰 Pricing:
+  // PRICE
+  else if(
+    text.includes("price") ||
+    text.includes("rate") ||
+    text.includes("cost") ||
+    text.includes("pricing")
+  ){
+    reply = `
+💰 Pricing:
 
-    Demo Website — ₹99
-    Influencer Website — ₹199
-    Professional Website — ₹349
-    Business Website — ₹699
-    `;
+Demo Website — ₹99
+Influencer Website — ₹199
+Professional Website — ₹349
+Business Website — ₹699
+`;
   }
 
-  // SERVICES
-  else if(text.includes("service")){
-    r = `
-    🛠 Services:
+  // ORDER WEBSITE
+  else if(
+    text.includes("website") ||
+    text.includes("banwani") ||
+    text.includes("banwana") ||
+    text.includes("order") ||
+    text.includes("buy")
+  ){
+    reply = `
+🚀 Website Order Started!
 
-    Website Development  
-    AI Chatbot  
-    Logo Design  
-    Business Ideas  
-    `;
+Please send:
+
+1️⃣ Website type
+2️⃣ Your name
+3️⃣ Requirement
+
+Owner will contact you 🔥
+`;
+  }
+
+  // LOGO DESIGN
+  else if(text.includes("logo")){
+    reply = "🎨 Logo design available. Tell your business name & style.";
+  }
+
+  // AI SERVICE
+  else if(text.includes("ai")){
+    reply = "🤖 AI services available for business ideas & automation.";
   }
 
   // DEFAULT
   else{
-    r = "Hello 👋 I am AI Naman Support. Ask me about services, pricing or contact.";
+    reply = "I can help with website, logo, AI tools, pricing or contact.";
   }
 
-  addAI(r);
+  setTimeout(()=>aiMsg(reply),500);
+
+  input.value="";
 }
 
-/* CLEAR CHAT */
 function clearChat(){
-  document.getElementById("chat").innerHTML="";
-}
-
-/* SCROLL DOWN */
-function scrollDown(){
-  let chat = document.getElementById("chat");
-  chat.scrollTop = chat.scrollHeight;
+  chat.innerHTML="";
+  aiMsg("Chat cleared ✔️");
 }
 
 </script>
