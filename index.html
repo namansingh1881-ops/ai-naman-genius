@@ -1,73 +1,150 @@
-<!DOCTYPE html><html lang="en">
+ <!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Genius - Digital Growth Partner</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-    body{background:#0b0f1a;color:#fff}
-    header{position:fixed;top:0;left:0;width:100%;background:#0b0f1a;display:flex;justify-content:space-between;align-items:center;padding:15px 20px;z-index:1000;border-bottom:1px solid #222}
-    .logo{font-weight:700;font-size:20px;color:#00e0ff}
-    .menu-btn{font-size:26px;cursor:pointer}/* Sidebar */
-.sidebar{position:fixed;top:0;left:-100%;width:280px;height:100%;background:#111827;padding:25px;transition:.4s;z-index:1100}
-.sidebar.active{left:0}
-.sidebar a{display:block;color:#fff;text-decoration:none;margin:18px 0;font-size:18px}
-.close-btn{font-size:26px;cursor:pointer;margin-bottom:20px;display:block}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Naman Genius</title>
 
-/* Hero */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:120px 20px 40px}
-.hero h1{font-size:48px;background:linear-gradient(90deg,#00e0ff,#ff00d4);-webkit-background-clip:text;color:transparent}
-.hero p{margin:15px 0 30px;color:#bbb}
-.btn{padding:14px 28px;margin:8px;border:none;border-radius:30px;font-size:16px;cursor:pointer;background:linear-gradient(90deg,#00e0ff,#ff00d4);color:#fff}
+<style>
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  color:white;
+  background:black;
+  overflow-x:hidden;
+}
 
-/* Sections */
-section{padding:70px 20px;max-width:1100px;margin:auto}
-h2{font-size:30px;margin-bottom:25px;text-align:center}
+/* BACKGROUND */
+.bg{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle at 30% 30%,#00f5ff22,transparent),
+              radial-gradient(circle at 70% 70%,#ff00ff22,transparent),
+              linear-gradient(#050510,#000);
+  z-index:-1;
+}
 
-.services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:#111827;padding:25px;border-radius:14px;text-align:center;border:1px solid #222}
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-footer{text-align:center;padding:25px;color:#888;border-top:1px solid #222;margin-top:40px}
+.hero h1{
+  font-size:60px;
+  background:linear-gradient(90deg,#00f5ff,#ff00ff);
+  -webkit-background-clip:text;
+  color:transparent;
+}
 
-  </style>
+.btn{
+  margin:12px;
+  padding:16px 34px;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(90deg,#00f5ff,#ff00ff);
+  color:black;
+  font-weight:bold;
+  font-size:18px;
+  cursor:pointer;
+  text-decoration:none;
+}
+
+/* 3 DOT BUTTON LEFT */
+.menuBtn{
+  position:fixed;
+  top:20px;
+  left:20px;
+  font-size:30px;
+  background:none;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
+/* SIDE MENU LEFT FULL */
+.menuBox{
+  position:fixed;
+  top:0;
+  left:-260px;
+  width:260px;
+  height:100%;
+  background:rgba(0,0,0,0.95);
+  backdrop-filter:blur(10px);
+  padding:20px;
+  transition:0.4s;
+  box-shadow:0 0 25px #000;
+}
+
+.menuBox a{
+  color:white;
+  text-decoration:none;
+  display:block;
+  padding:12px;
+  font-size:18px;
+}
+
+.menuBox hr{
+  margin:15px 0;
+  border:0.5px solid #444;
+}
+
+/* CONTACT INFO */
+.contactInfo{
+  font-size:14px;
+  line-height:1.6;
+  opacity:0.8;
+}
+</style>
 </head>
-<body><header>
-  <div class="logo">AI Genius</div>
-  <div class="menu-btn" onclick="openMenu()">☰</div>
-</header><div class="sidebar" id="sidebar">
-  <span class="close-btn" onclick="closeMenu()">✕</span>
-  <a href="#">🏠 Home</a>
-  <a href="#services">🛠 Services</a>
-  <a href="#contact">📩 Contact</a>
-  <hr style="margin:15px 0;border-color:#222">
-  <p>📧 Namosyx@gmail.com</p>
-  <p>📍 New Delhi</p>
-  <p>📷 @naman_singh6556</p>
-</div><section class="hero">
-  <h1>AI Genius</h1>
+
+<body>
+
+<div class="bg"></div>
+
+<!-- 3 DOT BUTTON -->
+<button class="menuBtn" onclick="toggleMenu()">⋮</button>
+
+<!-- SIDE MENU -->
+<div id="menuBox" class="menuBox">
+  <a href="index.html">🏠 Home</a>
+  <a href="services.html">🛠 Services</a>
+  <a href="contact.html">📩 Contact</a>
+
+  <hr>
+
+  <div class="contactInfo">
+    📧 Namosyx@gmail.com<br>
+    📍 New Delhi<br>
+    📸 @naman_singh6556
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>AI Naman Genius</h1>
   <p>Your Digital Growth Partner</p>
-  <button class="btn">Hire Me</button>
-  <button class="btn">Talk to AI</button>
-</section><section id="services">
-  <h2>My Services</h2>
-  <div class="services">
-    <div class="card">Website Development</div>
-    <div class="card">AI Chatbot</div>
-    <div class="card">Digital Marketing</div>
-    <div class="card">UI/UX Design</div>
-  </div>
-</section><section id="contact">
-  <h2>Contact</h2>
-  <div class="card">
-    <p>Email: Namosyx@gmail.com</p>
-    <p>City: New Delhi</p>
-    <p>Instagram: @naman_singh6556</p>
-  </div>
-</section><footer>
-  © 2026 AI Genius — All Rights Reserved
-</footer><script>
-function openMenu(){document.getElementById('sidebar').classList.add('active')}
-function closeMenu(){document.getElementById('sidebar').classList.remove('active')}
-</script></body>
+
+  <!-- WORKING BUTTONS -->
+  <a href="contact.html" class="btn">Hire Me</a>
+  <a href="ai.html" class="btn">Talk to AI</a>
+</div>
+
+<script>
+function toggleMenu(){
+  var menu = document.getElementById("menuBox");
+  if(menu.style.left === "0px"){
+    menu.style.left = "-260px";
+  } else {
+    menu.style.left = "0px";
+  }
+}
+</script>
+
+</body>
 </html>
