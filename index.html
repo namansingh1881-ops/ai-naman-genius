@@ -14,7 +14,6 @@ body{
   font-family:'Segoe UI',sans-serif;
   background:black;
   color:white;
-  overflow-x:hidden;
 }
 
 /* CYBER BACKGROUND */
@@ -51,15 +50,6 @@ body{
   padding:20px;
   border-radius:14px;
   width:260px;
-  backdrop-filter:blur(12px);
-  box-shadow:0 0 20px #000;
-}
-
-.menuBox a{
-  display:block;
-  padding:10px;
-  color:white;
-  text-decoration:none;
 }
 
 /* HERO */
@@ -89,7 +79,6 @@ body{
   color:black;
   font-weight:bold;
   cursor:pointer;
-  text-decoration:none;
 }
 
 /* SECTION */
@@ -98,7 +87,7 @@ body{
   text-align:center;
 }
 
-/* SERVICES GRID */
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
@@ -110,10 +99,47 @@ body{
   background:#111;
   padding:25px;
   border-radius:12px;
-  box-shadow:0 0 20px #000;
 }
 
-/* FOOTER */
+/* ORDER BUTTON */
+.orderBtn{
+  margin-top:15px;
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,#00f5ff,#ff00ff);
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* POPUP FORM */
+.popup{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:#000c;
+  display:none;
+}
+
+.formBox{
+  background:#111;
+  padding:20px;
+  margin:60px auto;
+  width:90%;
+  max-width:400px;
+  border-radius:12px;
+}
+
+input, textarea{
+  width:100%;
+  margin:8px 0;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+}
+
 footer{
   text-align:center;
   padding:30px;
@@ -127,7 +153,6 @@ footer{
 
 <div class="bg"></div>
 
-<!-- MENU -->
 <button class="menuBtn" onclick="toggleMenu()">☰</button>
 
 <div id="menuBox" class="menuBox">
@@ -135,10 +160,6 @@ footer{
   <a href="#services">Services</a>
   <a href="#pricing">Pricing</a>
   <a href="#contact">Contact</a>
-  <hr>
-  📧 Namosyx@gmail.com<br>
-  📍 New Delhi<br>
-  📷 @naman_singh6556
 </div>
 
 <!-- HERO -->
@@ -150,42 +171,9 @@ footer{
   <a href="ai.html" class="btn">Talk to AI</a>
 </div>
 
-<!-- ABOUT -->
-<div class="section">
-  <h2>About Me</h2>
-  <p>
-  I create futuristic websites, AI chatbots, branding and business ideas.
-  Helping influencers, startups and businesses grow online.
-  </p>
-</div>
-
 <!-- SERVICES -->
 <div id="services" class="section">
   <h2>My Services</h2>
-
-  <div class="grid">
-
-    <div class="card">
-      <h3>Website Development</h3>
-      <p>Cyber futuristic websites for influencers & businesses</p>
-    </div>
-
-    <div class="card">
-      <h3>AI Chatbot</h3>
-      <p>Custom AI chatbot for your business</p>
-    </div>
-
-    <div class="card">
-      <h3>Logo Design</h3>
-      <p>Modern logo & branding</p>
-    </div>
-
-    <div class="card">
-      <h3>Business Ideas</h3>
-      <p>AI powered business strategy</p>
-    </div>
-
-  </div>
 </div>
 
 <!-- PRICING -->
@@ -197,50 +185,92 @@ footer{
     <div class="card">
       <h3>Demo Website</h3>
       <p>₹99</p>
+      <button class="orderBtn" onclick="openForm('Demo Website')">Order Now</button>
     </div>
 
     <div class="card">
       <h3>Influencer Website</h3>
       <p>₹199</p>
+      <button class="orderBtn" onclick="openForm('Influencer Website')">Order Now</button>
     </div>
 
     <div class="card">
       <h3>Professional Website</h3>
       <p>₹349</p>
+      <button class="orderBtn" onclick="openForm('Professional Website')">Order Now</button>
     </div>
 
     <div class="card">
       <h3>Business Website</h3>
       <p>₹699</p>
+      <button class="orderBtn" onclick="openForm('Business Website')">Order Now</button>
     </div>
 
   </div>
-</div>
-
-<!-- TESTIMONIALS -->
-<div class="section">
-  <h2>Client Reviews</h2>
-  <p>"Amazing futuristic website" — Rahul</p>
-  <p>"Best AI chatbot service" — Aman</p>
 </div>
 
 <!-- CONTACT -->
 <div id="contact" class="section">
   <h2>Contact</h2>
   <p>Email: Namosyx@gmail.com</p>
-  <p>Location: New Delhi</p>
-  <p>Instagram: @naman_singh6556</p>
 </div>
 
 <footer>
   © 2026 AI Naman Genius
 </footer>
 
+<!-- ORDER FORM -->
+<div id="orderForm" class="popup">
+  <div class="formBox">
+    <h2>Website Order</h2>
+
+    <input id="name" placeholder="Your Name">
+    <input id="phone" placeholder="Phone Number">
+    <input id="email" placeholder="Email">
+    <textarea id="details" placeholder="Website details"></textarea>
+
+    <button class="orderBtn" onclick="sendOrder()">Submit</button>
+    <button class="orderBtn" onclick="closeForm()">Close</button>
+  </div>
+</div>
+
 <script>
+
 function toggleMenu(){
   var menu = document.getElementById("menuBox");
   menu.style.display = menu.style.display === "block" ? "none" : "block";
 }
+
+let selectedPlan = "";
+
+function openForm(plan){
+  selectedPlan = plan;
+  document.getElementById("orderForm").style.display="block";
+}
+
+function closeForm(){
+  document.getElementById("orderForm").style.display="none";
+}
+
+function sendOrder(){
+
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let email = document.getElementById("email").value;
+  let details = document.getElementById("details").value;
+
+  let msg =
+  "NEW WEBSITE ORDER%0A" +
+  "Plan: " + selectedPlan + "%0A" +
+  "Name: " + name + "%0A" +
+  "Phone: " + phone + "%0A" +
+  "Email: " + email + "%0A" +
+  "Details: " + details;
+
+  window.open("https://wa.me/91XXXXXXXXXX?text=" + msg);
+
+}
+
 </script>
 
 </body>
